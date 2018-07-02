@@ -6,12 +6,20 @@ from random import *
 x = 0
 y = 0
 difficulty = 0
+pHealth = 100
+pMana = 100;
+pGold = 0;
+pPotion = 1;
+pWeapons = 0;
+pArmour = 0;
+
 
 def Generate(x,y,diff):
         #This creates the game board by making and filling a grid
         grid = []
         sgrid = []
         generate = randint(1,100)
+       
 
         empty = "X"
         blocked = "+"
@@ -81,9 +89,12 @@ def Generate(x,y,diff):
 def play(grid,x,y,diff,sgrid):
         xp = 0
         yp = 0
+        global pHealth
+        global pMana
+        global pGold
         print("""
 		Where would you like to move?
-                        use wasd to move
+                             use wasd, then enter,  to move
 	""")
         flag = True
         while flag:
@@ -96,24 +107,20 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+": 
                                         sgrid[yp][xp] = "+"
                                         yp += 1
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp + 1][xp] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        
+                                        update(sgrid)
                                         print("A Monster Appeared!")
                                 
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp + 1][xp] = "X"
                                         print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                         else:
                                 print ("You can't go that way")
                 elif flag == "s":
@@ -123,22 +130,19 @@ def play(grid,x,y,diff,sgrid):
                                         sgrid[yp][xp] = "+"
                                         yp -= 1
                                         print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp - 1][xp] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                       
+                                       
+                                        update(sgrid)
                                         print("A Monster Appeared!")
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp - 1][xp] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                         else:
                                 print ("You can't go that way")
                 elif flag == "d":
@@ -147,23 +151,18 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+":
                                         sgrid[yp][xp] = "+"
                                         xp -= 1
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp - 1] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                       
+                                        update(sgrid)
                                         print("A Monster Appeared!")
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp - 1] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                         else:
                                 print ("You can't go that way")
                                 
@@ -174,26 +173,20 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+":
                                         sgrid[yp][xp] = "+"
                                         xp += 1
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp + 1] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                                         print("A Monster Appeared!")
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp + 1] = "X"
-                                        print ("\n" * 60)
-                                        for row in sgrid:
-                                                print(row)
+                                        update(sgrid)
                         else:
                                 print ("You can't go that way")
-                elif flag == "":
+                elif flag == "" or flag == " ":
                         print("\n Not a Valid Option, Try Again \n")
 
         
@@ -238,6 +231,80 @@ def Settings():
 
 
 
+def monster():
+        rnd = randint(1,100)
+
+        massiveSpider()
+"""
+        if rnd > 90:
+                ogre()
+        elif rnd > 70:
+                 troll()
+        elif rnd > 50:
+                goblin()
+        elif rnd > 10
+                giantRat()
+        elif rnd > 0
+                massiveSpider()
+"""        
+
+
+def massiveSpider()
+        print ("\n" * 60)
+        print("Health: " + str(pHealth) + " / " + "Mana: " + str(pMana))
+        print ("""
+                        /\ \  / /\
+                        //\\ .. //\\
+                        //\((  ))/\\
+                        /  < `' >  \
+        """)
+
+        mHealth = 30
+        mGold = rndint(1,100)
+        Battle(mHealth,mGold)        
+
+
+
+def Battle(mHealth,mGold)
+        global pWeapons
+     print("""
+                What Would you Like to do?
+
+                1. Melee
+                2. Magic
+                3. Potion(""" + str(pPotion) + ")")   
+        
+        flag = True
+        while flag:
+	#Checks to see what action the player wants to take
+	flag = input(""""
+                                   What Would you Like to do?
+
+                                                1. Melee
+                                                2. Magic
+                                                3. Potion(""" + str(pPotion) + ")")
+                        
+		if flag == "1":
+			hit = rndint(1,10)
+			hit = hit + pWeapons
+			
+			
+		elif flag == "2":
+			Tutorial()
+			flag = False
+		elif flag == "3":
+			exit()
+		elif flag != "" or flag > 3:
+			print("\n Not a Valid Option, Try Again \n")
+
+def update(sgrid):
+        print ("\n" * 60)
+        for row in sgrid:
+                print(row)
+        print("Health: " + str(pHealth) + " / " + "Mana: " + str(pMana) + " / " + "Gold: " + str(pGold))
+
+
+        
 
 def menu():
 	# menu function thats takes input from the user
