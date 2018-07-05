@@ -2,24 +2,17 @@
 #Matthew McCarty
 
 from random import *
+from graphics import *
 
 x = 0
 y = 0
 difficulty = 0
-pHealth = 100
-pMana = 100;
-pGold = 0;
-pPotion = 1;
-pWeapons = 0;
-pArmour = 0;
-
 
 def Generate(x,y,diff):
         #This creates the game board by making and filling a grid
         grid = []
         sgrid = []
         generate = randint(1,100)
-       
 
         empty = "X"
         blocked = "+"
@@ -79,6 +72,9 @@ def Generate(x,y,diff):
         for row in sgrid:
                 print(row)
 
+
+                
+        main(x,y)
         play(grid,x,y,diff,sgrid)
         
 
@@ -89,12 +85,9 @@ def Generate(x,y,diff):
 def play(grid,x,y,diff,sgrid):
         xp = 0
         yp = 0
-        global pHealth
-        global pMana
-        global pGold
         print("""
 		Where would you like to move?
-                             use wasd, then enter,  to move
+                        use wasd to move
 	""")
         flag = True
         while flag:
@@ -107,20 +100,26 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+": 
                                         sgrid[yp][xp] = "+"
                                         yp += 1
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp + 1][xp] = "X"
-                                        
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("A Monster Appeared!")
                                 
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp + 1][xp] = "X"
                                         print ("\n" * 60)
-                                        update(sgrid)
+                                        for row in sgrid:
+                                                print(row)
                         else:
                                 print ("You can't go that way")
                 elif flag == "s":
@@ -129,20 +128,25 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+":
                                         sgrid[yp][xp] = "+"
                                         yp -= 1
+                                        update(grid,yp,xp)
                                         print ("\n" * 60)
-                                        update(sgrid)
+                                        for row in sgrid:
+                                                print(row)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp - 1][xp] = "X"
-                                       
-                                       
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("A Monster Appeared!")
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp - 1][xp] = "X"
-                                        update(sgrid)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                         else:
                                 print ("You can't go that way")
                 elif flag == "d":
@@ -151,18 +155,25 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+":
                                         sgrid[yp][xp] = "+"
                                         xp -= 1
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp - 1] = "X"
-                                       
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("A Monster Appeared!")
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp - 1] = "X"
-                                        update(sgrid)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                         else:
                                 print ("You can't go that way")
                                 
@@ -173,20 +184,28 @@ def play(grid,x,y,diff,sgrid):
                                 if grid[yp][xp] == "+":
                                         sgrid[yp][xp] = "+"
                                         xp += 1
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("The way is blocked!")
                                 elif grid[yp][xp] == "M":
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp + 1] = "X"
-                                        update(sgrid)
+                                        update(grid,yp,xp)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                                         print("A Monster Appeared!")
                                 else:
                                         sgrid[yp][xp] = "O"
                                         sgrid[yp][xp + 1] = "X"
-                                        update(sgrid)
+                                        print ("\n" * 60)
+                                        for row in sgrid:
+                                                print(row)
                         else:
                                 print ("You can't go that way")
-                elif flag == "" or flag == " ":
+                elif flag == "":
                         print("\n Not a Valid Option, Try Again \n")
 
         
@@ -231,80 +250,6 @@ def Settings():
 
 
 
-def monster():
-        rnd = randint(1,100)
-
-        massiveSpider()
-"""
-        if rnd > 90:
-                ogre()
-        elif rnd > 70:
-                 troll()
-        elif rnd > 50:
-                goblin()
-        elif rnd > 10
-                giantRat()
-        elif rnd > 0
-                massiveSpider()
-"""        
-
-
-def massiveSpider()
-        print ("\n" * 60)
-        print("Health: " + str(pHealth) + " / " + "Mana: " + str(pMana))
-        print ("""
-                        /\ \  / /\
-                        //\\ .. //\\
-                        //\((  ))/\\
-                        /  < `' >  \
-        """)
-
-        mHealth = 30
-        mGold = rndint(1,100)
-        Battle(mHealth,mGold)        
-
-
-
-def Battle(mHealth,mGold)
-        global pWeapons
-     print("""
-                What Would you Like to do?
-
-                1. Melee
-                2. Magic
-                3. Potion(""" + str(pPotion) + ")")   
-        
-        flag = True
-        while flag:
-	#Checks to see what action the player wants to take
-	flag = input(""""
-                                   What Would you Like to do?
-
-                                                1. Melee
-                                                2. Magic
-                                                3. Potion(""" + str(pPotion) + ")")
-                        
-		if flag == "1":
-			hit = rndint(1,10)
-			hit = hit + pWeapons
-			
-			
-		elif flag == "2":
-			Tutorial()
-			flag = False
-		elif flag == "3":
-			exit()
-		elif flag != "" or flag > 3:
-			print("\n Not a Valid Option, Try Again \n")
-
-def update(sgrid):
-        print ("\n" * 60)
-        for row in sgrid:
-                print(row)
-        print("Health: " + str(pHealth) + " / " + "Mana: " + str(pMana) + " / " + "Gold: " + str(pGold))
-
-
-        
 
 def menu():
 	# menu function thats takes input from the user
@@ -331,6 +276,53 @@ def menu():
 
 
 
+#def update(grid,yp,xp):
 
+        #updates the game window to show the players enviroment
+   
+        
+        
+        
+  
+
+def main(x,y):
+        #creates a new window and creates a new gameboard to be shown to the player
+        xp = 0
+        yp = 0
+        changey = 50
+        changex = 50
+        total = x*y
+        check = 0
+
+
+        Xsize = (50 * x) + 40
+        Ysize = (50 * y) + 40
+        
+        win = GraphWin("Python Dungeon Crawler",Xsize,Ysize)
+        win.setBackground(color_rgb(65,65,65))
+
+
+        for i in range(y):
+                if i == 0:
+                        yp += 20
+                else:
+                         yp += changey 
+                xp = 20
+                for j in range(x):
+                        TLpt = Point(xp,yp)
+                        xp += changex 
+                        BRpt = Point(xp, yp + 50)
+                        rect = Rectangle(TLpt,BRpt)
+                        if check == 0:
+                                rect.setFill(color_rgb(153,204,0))
+                        elif check == total - 1:
+                                rect.setFill(color_rgb(128,0,0))
+                        else:
+                                rect.setFill(color_rgb(0,0,0))
+                        
+                        rect.draw(win)
+                        check += 1
+
+                        
 
 menu()
